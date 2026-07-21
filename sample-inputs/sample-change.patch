@@ -1,0 +1,40 @@
+From 07a36c8b3e6fa817d4433945350c22b2e71412e0 Mon Sep 17 00:00:00 2001
+From: PRCS Sample <sample@example.invalid>
+Date: Tue, 21 Jul 2026 22:38:54 +0530
+Subject: [PATCH] add bounded cart discounts
+
+---
+ src/cart.ts        | 6 ++++--
+ tests/cart.test.ts | 4 ++++
+ 2 files changed, 8 insertions(+), 2 deletions(-)
+
+diff --git a/src/cart.ts b/src/cart.ts
+index fc2c6c5..947f20a 100644
+--- a/src/cart.ts
++++ b/src/cart.ts
+@@ -1,5 +1,7 @@
+ export type CartItem = { price: number; quantity: number };
+ 
+-export function cartTotal(items: CartItem[]): number {
+-  return items.reduce((total, item) => total + item.price * item.quantity, 0);
++export function cartTotal(items: CartItem[], discountPercent = 0): number {
++  const subtotal = items.reduce((total, item) => total + item.price * item.quantity, 0);
++  const boundedDiscount = Math.min(100, Math.max(0, discountPercent));
++  return subtotal * (1 - boundedDiscount / 100);
+ }
+diff --git a/tests/cart.test.ts b/tests/cart.test.ts
+index 47628f8..1f552c2 100644
+--- a/tests/cart.test.ts
++++ b/tests/cart.test.ts
+@@ -5,4 +5,8 @@ describe("cartTotal", () => {
+   it("totals line items", () => {
+     expect(cartTotal([{ price: 12, quantity: 2 }])).toBe(24);
+   });
++
++  it("applies a bounded percentage discount", () => {
++    expect(cartTotal([{ price: 20, quantity: 2 }], 25)).toBe(30);
++  });
+ });
+-- 
+2.55.0
+
