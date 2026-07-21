@@ -6,6 +6,8 @@ PR Consequence Simulator analyzes a proposed code change and predicts its likely
 
 **Production:** https://pr-consequence-simulator.vercel.app — no account required.
 
+**Source:** https://github.com/manasrpandya/PR_consequence_sim
+
 For the fastest judge test, paste a public GitHub PR URL such as `https://github.com/vercel/next.js/pull/82995`, inspect it, then start analysis. A prepared example is available at `/demo`. The hosted app also accepts a Git bundle or project ZIP plus patch, with a **3.5 MB combined multipart limit**. Public URL mode supports public GitHub PRs; no token is sent to the browser.
 
 ## Problem
@@ -59,6 +61,8 @@ The current differentiator is: **A unified consequence-analysis pipeline that co
 Requirements: Node 20+, pnpm 10.33+, Python 3.12, Git, and optionally Vercel CLI 56+.
 
 ```bash
+git clone https://github.com/manasrpandya/PR_consequence_sim.git
+cd PR_consequence_sim
 pnpm install --frozen-lockfile
 python3.12 -m venv services/engine/.venv
 services/engine/.venv/bin/pip install -r services/engine/requirements.txt
@@ -131,4 +135,4 @@ Train and calibrate an action-conditioned latent repo/workflow model on consente
 
 ## License
 
-No license has been added because the repository owner’s legal copyright name has not been established unambiguously. Adding an approved license and owner name is a manual submission step.
+No license has been added because the repository owner’s preferred legal copyright name has not been confirmed. Add the approved license before submission; do not assume that public visibility alone grants reuse rights.

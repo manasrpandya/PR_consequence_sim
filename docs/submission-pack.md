@@ -65,7 +65,7 @@ Learn a calibrated action-conditioned latent representation of repository and wo
 ## Submission checklist
 
 - [x] Production URL: https://pr-consequence-simulator.vercel.app
-- [ ] Public repository URL: `ADD AFTER PUBLISHING`
+- [x] Public repository URL: https://github.com/manasrpandya/PR_consequence_sim
 - [ ] Public YouTube demo under three minutes: `ADD URL`
 - [ ] Codex `/feedback` session ID: `RUN /feedback IN THE CURRENT CODEX SESSION`
 - [x] Category: Developer Tools
