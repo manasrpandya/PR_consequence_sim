@@ -1,6 +1,6 @@
-From 07a36c8b3e6fa817d4433945350c22b2e71412e0 Mon Sep 17 00:00:00 2001
-From: PRCS Sample <sample@example.invalid>
-Date: Tue, 21 Jul 2026 22:38:54 +0530
+From 1ca372ed2d434ab4192b70cf59413e4d14c93add Mon Sep 17 00:00:00 2001
+From: IMerge Sample <sample@example.invalid>
+Date: Wed, 22 Jul 2026 00:55:57 +0530
 Subject: [PATCH] add bounded cart discounts
 
 ---

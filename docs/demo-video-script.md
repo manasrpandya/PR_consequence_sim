@@ -8,7 +8,7 @@ Record after warming one live PR analysis in a spare tab. Keep the guided exampl
 
 ## 0:20–0:35 — Product
 
-**Clicks:** Slowly point to the five output cards. **Narration:** “PR Consequence Simulator turns one proposed change into five decisions: impact, relevant tests, transparent risk, workflow delay, and the safest next action—with evidence and uncertainty attached.”
+**Clicks:** Slowly point to the five output cards. **Narration:** “IMerge turns one proposed change into five decisions: impact, relevant tests, transparent risk, workflow delay, and the safest next action—with evidence and uncertainty attached.”
 
 ## 0:35–1:40 — Live judge-testable analysis
 
@@ -28,4 +28,4 @@ Record after warming one live PR analysis in a spare tab. Keep the guided exampl
 
 ## 2:35–2:50 — Closing
 
-**Screen:** Return to homepage with URL bar visible. **Narration:** “PR Consequence Simulator gives engineers one evidence-backed view of what a change may affect and what to do next—before merge. Try it now at pr-consequence-simulator.vercel.app.”
+**Screen:** Return to homepage with URL bar visible. **Narration:** “IMerge gives engineers one evidence-backed view of what a change may affect and what to do next—before merge. Try it now at imerge-ai.vercel.app.”

@@ -4,7 +4,7 @@ This is a work-product record, not a transcript or private reasoning log.
 
 ## Phases and contributions
 
-1. **Research and product selection.** ChatGPT GPT-5.6 Sol examined usability, competitive framing, novelty risk, and hackathon fit. The human selected the consequence-simulator direction and rejected inflated novelty claims.
+1. **Research and product selection.** ChatGPT GPT-5.6 Sol examined usability, competitive framing, novelty risk, and hackathon fit. The human selected the unified consequence-analysis direction and rejected inflated novelty claims.
 2. **Fixture vertical slice.** Codex translated the thesis into Pydantic schemas, FastAPI routes, repository fixtures, impact traversal, test ranking, transparent risk factors, workflow estimates, scenario simulation, evaluation, and tests under `services/engine` and `fixtures`.
 3. **Product onboarding.** ChatGPT critiqued a dashboard-first/fixture-first experience. Codex built the landing page, input flow, navigation, observed/predicted/suggested hierarchy, evidence UI, responsive behavior, and guided demo in `apps/web`.
 4. **Public GitHub PR analysis.** The human prioritized a no-account judge path. Codex implemented canonical URL parsing, server-only optional authentication, bounded pagination, timeouts, rate-limit messages, patch normalization, provenance, and tests.

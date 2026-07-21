@@ -32,7 +32,7 @@ printf '%s\n' \
 printf '%s\n' '{"name":"sample-cart","private":true,"scripts":{"test":"vitest run"},"devDependencies":{"vitest":"^2.1.9"}}' > "$repo_dir/package.json"
 
 git -C "$repo_dir" init -q -b main
-git -C "$repo_dir" config user.name "PRCS Sample"
+git -C "$repo_dir" config user.name "IMerge Sample"
 git -C "$repo_dir" config user.email "sample@example.invalid"
 git -C "$repo_dir" add .
 git -C "$repo_dir" commit -qm "base cart total"

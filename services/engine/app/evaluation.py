@@ -14,7 +14,7 @@ def main() -> None:
         ratios.append(a.estimated_test_duration_seconds/a.expected_full_suite_duration_seconds)
         risks.append((pr.id,a.risk_score)); eta_errors.append(abs(a.workflow.time_to_green_minutes-pr.ground_truth.time_to_green_minutes))
     avg=lambda xs,i:mean(x[i] for x in xs)
-    print("PR Consequence Simulator — fixture evaluation")
+    print("IMerge — fixture evaluation")
     print(f"Impacted modules  P={avg(module_scores,0):.3f} R={avg(module_scores,1):.3f} F1={avg(module_scores,2):.3f}")
     print(f"Selected tests     P={avg(test_scores,0):.3f} R={avg(test_scores,1):.3f} F1={avg(test_scores,2):.3f}")
     print(f"Missed failing-test rate: {mean(misses):.3f}")

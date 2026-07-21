@@ -12,7 +12,7 @@ from .uploads import (
     enforce_hosted_request_limit,
 )
 
-app=FastAPI(title="PR Consequence Simulator Engine",version="1.0.0",docs_url=None,redoc_url=None)
+app=FastAPI(title="IMerge Engine",version="1.0.0",docs_url=None,redoc_url=None)
 origins=[origin.strip() for origin in os.getenv("ALLOWED_ORIGINS","http://localhost:3000").split(",") if origin.strip()]
 app.add_middleware(CORSMiddleware,allow_origins=origins,allow_methods=["GET","POST"],allow_headers=["Content-Type"],allow_credentials=False)
 

@@ -51,7 +51,7 @@ class TemporaryStorage:
 class LocalTemporaryStorage(TemporaryStorage):
     @contextmanager
     def workspace(self) -> Iterator[Path]:
-        root=Path(tempfile.mkdtemp(prefix="prcs-"))
+        root=Path(tempfile.mkdtemp(prefix="imerge-"))
         try: yield root
         finally: shutil.rmtree(root,ignore_errors=True)
 
@@ -271,7 +271,7 @@ def github_coordinates(url:str) -> tuple[str,str,int]:
 def github_json(url:str) -> object:
     if not url.startswith("https://api.github.com/repos/"):
         raise UploadProblem("unsupported_host", "Only GitHub API requests are allowed")
-    headers={"Accept":"application/vnd.github+json","User-Agent":"pr-consequence-simulator","X-GitHub-Api-Version":"2022-11-28"}
+    headers={"Accept":"application/vnd.github+json","User-Agent":"imerge","X-GitHub-Api-Version":"2022-11-28"}
     token=os.getenv("GITHUB_TOKEN")
     if token: headers["Authorization"]=f"Bearer {token}"
     request=urllib.request.Request(url,headers=headers)

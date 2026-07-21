@@ -1,1 +1,1 @@
-"""PR Consequence Simulator engine."""
+"""IMerge prediction engine."""

@@ -1,10 +1,12 @@
-# PR Consequence Simulator
+# IMerge
 
-PR Consequence Simulator analyzes a proposed code change and predicts its likely blast radius, relevant tests, engineering risk, workflow delay, and safest next action.
+**See what a code change may affect before it merges.**
+
+IMerge analyzes a proposed code change and predicts its likely impact, relevant tests, engineering risk, workflow delays, and safest next action.
 
 ## Live demo
 
-**Production:** https://pr-consequence-simulator.vercel.app — no account required.
+**Production:** https://imerge-ai.vercel.app — no account required.
 
 **Source:** https://github.com/manasrpandya/PR_consequence_sim
 
@@ -89,7 +91,7 @@ PYTHONPATH=services/engine services/engine/.venv/bin/python -c 'from app.main im
 pnpm dlx vercel@latest build --yes
 pnpm dlx vercel@latest deploy --yes
 pnpm dlx vercel@latest deploy --prod --yes
-curl -fsS https://pr-consequence-simulator.vercel.app/health
+curl -fsS https://imerge-ai.vercel.app/health
 ```
 
 Vercel request/response payloads are limited to 4.5 MB, so the UI and backend reserve multipart overhead and cap hosted files at 3.5 MB total. Functions are bounded to 60 seconds; GitHub calls use shorter timeouts.
