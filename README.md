@@ -85,7 +85,7 @@ PYTHONPATH=services/engine services/engine/.venv/bin/python -c 'from app.main im
 
 ## Deployment
 
-`vercel.json` defines the frontend and backend services and same-origin rewrites. Runtime environment names are `GITHUB_TOKEN` (optional), `OPENAI_API_KEY` (optional), `OPENAI_MODEL` (`gpt-5.6-sol` in deployment), `NEXT_PUBLIC_APP_URL` (canonical metadata URL), `NEXT_PUBLIC_ENGINE_URL` (local or split deployments only), and `ALLOWED_ORIGINS` (split deployments only). Secrets stay server-side.
+`vercel.json` defines the frontend and backend services and same-origin rewrites. Runtime environment names are `GITHUB_TOKEN` (optional), `OPENAI_API_KEY` (optional), `OPENAI_MODEL` (`gpt-5.6-sol` in deployment), `NEXT_PUBLIC_APP_URL` (canonical metadata URL), `NEXT_PUBLIC_ENGINE_URL` (local development only), and `ALLOWED_ORIGINS` (split deployments only). Production and preview browser requests always use relative same-origin API paths. Secrets stay server-side.
 
 ```bash
 pnpm dlx vercel@latest build --yes

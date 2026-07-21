@@ -278,10 +278,16 @@ def github_json(url:str) -> object:
     try:
         with urllib.request.urlopen(request,timeout=10) as response: return json.loads(response.read(MAX_DIFF+1))
     except urllib.error.HTTPError as exc:
-        if exc.code in {403,429}: raise UploadProblem("github_rate_limited","GitHub rate limit reached. Try again shortly or use the guided example.",429) from exc
+        if exc.code==429 or (exc.code==403 and exc.headers.get("X-RateLimit-Remaining")=="0"): raise UploadProblem("github_rate_limited","GitHub rate limit reached. Try again shortly or use the guided example.",429) from exc
+        if exc.code==401: raise UploadProblem("github_auth_failed","GitHub authentication failed. The deployment token may be invalid.",502) from exc
+        if exc.code==403: raise UploadProblem("github_not_accessible","GitHub refused access to that pull request. Confirm that the repository is public.",403) from exc
         if exc.code==404: raise UploadProblem("github_not_found","That public pull request was not found or is not accessible.",404) from exc
         raise UploadProblem("github_unavailable","GitHub could not complete the request.",502) from exc
-    except (urllib.error.URLError,TimeoutError,json.JSONDecodeError) as exc: raise UploadProblem("github_unavailable","GitHub timed out or returned unreadable data. Try again or use the guided example.",502) from exc
+    except TimeoutError as exc: raise UploadProblem("github_timeout","GitHub timed out. Try again or use the guided example.",504) from exc
+    except urllib.error.URLError as exc:
+        if isinstance(exc.reason,TimeoutError): raise UploadProblem("github_timeout","GitHub timed out. Try again or use the guided example.",504) from exc
+        raise UploadProblem("github_unavailable","GitHub could not be reached. Try again or use the guided example.",502) from exc
+    except json.JSONDecodeError as exc: raise UploadProblem("github_malformed_response","GitHub returned an unreadable response. Try again shortly.",502) from exc
 
 def inspect_github(url:str) -> tuple[UploadInspection,dict[str,object],list[dict[str,object]]]:
     owner,name,number=github_coordinates(url); pr=github_json(f"https://api.github.com/repos/{owner}/{name}/pulls/{number}")

@@ -1,6 +1,8 @@
+import logging
 import os
+import uuid
 from pathlib import Path
-from fastapi import FastAPI, File, Form, HTTPException, UploadFile
+from fastapi import FastAPI, File, Form, HTTPException, Request, UploadFile
 from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 from .models import *
@@ -13,12 +15,20 @@ from .uploads import (
 )
 
 app=FastAPI(title="IMerge Engine",version="1.0.0",docs_url=None,redoc_url=None)
+logger=logging.getLogger("imerge.engine")
 origins=[origin.strip() for origin in os.getenv("ALLOWED_ORIGINS","http://localhost:3000").split(",") if origin.strip()]
 app.add_middleware(CORSMiddleware,allow_origins=origins,allow_methods=["GET","POST"],allow_headers=["Content-Type"],allow_credentials=False)
 
 @app.middleware("http")
-async def security_headers(request, call_next):
-    response=await call_next(request)
+async def security_headers(request: Request, call_next):
+    request_id=uuid.uuid4().hex
+    request.state.request_id=request_id
+    try:
+        response=await call_next(request)
+    except Exception:
+        logger.exception("request_failed request_id=%s method=%s path=%s",request_id,request.method,request.url.path)
+        response=JSONResponse(status_code=500,content={"error":{"code":"internal_analysis_failure","message":"The analysis service failed while processing this request.","request_id":request_id}})
+    response.headers["X-Request-ID"]=request_id
     response.headers["X-Content-Type-Options"]="nosniff"
     response.headers["Referrer-Policy"]="strict-origin-when-cross-origin"
     response.headers["Cache-Control"]="no-store"
@@ -26,8 +36,10 @@ async def security_headers(request, call_next):
 service=AnalysisService(); simulator=ActionSimulator()
 
 @app.exception_handler(UploadProblem)
-async def upload_problem_handler(_, exc: UploadProblem) -> JSONResponse:
-    return JSONResponse(status_code=exc.status,content={"error":{"code":exc.code,"message":exc.message}})
+async def upload_problem_handler(request: Request, exc: UploadProblem) -> JSONResponse:
+    request_id=getattr(request.state,"request_id",uuid.uuid4().hex)
+    logger.warning("request_rejected request_id=%s code=%s path=%s",request_id,exc.code,request.url.path)
+    return JSONResponse(status_code=exc.status,content={"error":{"code":exc.code,"message":exc.message,"request_id":request_id}})
 def get_pr(pr_id: str) -> PullRequest:
     try: return store.pull_request(pr_id)
     except KeyError as exc: raise HTTPException(404,f"Pull request '{pr_id}' was not found") from exc

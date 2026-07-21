@@ -1,7 +1,8 @@
 import asyncio
+import json
 import pytest
-from fastapi import HTTPException
-from app.main import app, analyze, health, inspect_upload, repositories, simulate
+from fastapi import HTTPException, Request
+from app.main import app, analyze, health, inspect_upload, repositories, simulate, upload_problem_handler
 from app.uploads import UploadProblem
 
 def run(coroutine):
@@ -32,3 +33,12 @@ def test_missing_project_evidence_is_structured():
     with pytest.raises(UploadProblem) as caught:
         run(inspect_upload(None,None))
     assert caught.value.code=="missing_archive"
+
+def test_public_pr_validation_error_has_code_and_request_id():
+    request=Request({"type":"http","method":"POST","path":"/api/v1/github/inspect","headers":[],"query_string":b"","scheme":"http","server":("test",80),"client":("test",123)})
+    request.state.request_id="request-123"
+    response=run(upload_problem_handler(request,UploadProblem("unsupported_type","Enter a public GitHub pull request URL")))
+    assert response.status_code==400
+    payload=json.loads(response.body)["error"]
+    assert payload["code"]=="unsupported_type"
+    assert payload["request_id"]=="request-123"
