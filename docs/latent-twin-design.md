@@ -1,0 +1,9 @@
+# Future latent twin design
+
+The future model represents a repository and its engineering workflow as a fused latent state. The repository structure encoder consumes files, modules, dependency edges, ownership, and test relationships. A workflow event encoder consumes CI jobs, failures, reruns, review transitions, and elapsed-time signals. Fusion produces the context state immediately before a PR intervention; the target state represents observed structure, test outcomes, risk events, and workflow state after that intervention.
+
+A PR is an intervention containing its diff, changed topology, and metadata. Candidate actions are additional interventions. An action-conditioned latent transition predictor estimates their consequences without decoding the entire repository. Dedicated heads produce impact, calibrated test selection, risk, ETA/bottleneck, and counterfactual action value. This unified, action-conditioned representation and consequence simulation is the intended differentiator; it is not a claim that related representation-learning or software analytics work does not exist.
+
+Training labels include observed affected modules, test failures and coverage, CI duration, reruns, review latency, merge latency, incidents/reverts, and action outcomes. Calibration sets and time-based repository splits are required to prevent leakage. The deterministic interfaces in this slice become fallback implementations and comparison baselines; learned heads can replace one family at a time without changing API contracts.
+
+The intended ablation is: (1) static deterministic/statistical baseline; (2) repository latent model; (3) repository plus workflow fusion; and (4) fused model plus action-conditioned planner. Evaluation must separately measure predictive quality, calibration, cost, and action utility.

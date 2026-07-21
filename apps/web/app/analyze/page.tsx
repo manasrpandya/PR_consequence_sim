@@ -1,0 +1,2 @@
+import {AnalyzeIntake} from "../../components/analyze-intake";import {DottedBackground} from "../../components/dotted-background";
+export default function AnalyzePage(){return <main className="analyze-page"><DottedBackground/><div className="analyze-wrap"><span className="eyebrow">No account · local analysis</span><h1>Analyze your change.</h1><p>Submit a public pull request, repository bundle with history, or project archive with its proposed diff. Every mode feeds the same consequence prediction pipeline.</p><AnalyzeIntake/></div></main>}

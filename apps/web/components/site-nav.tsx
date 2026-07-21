@@ -1,0 +1,4 @@
+"use client";
+import Link from "next/link";import {usePathname} from "next/navigation";import {GitBranch} from "lucide-react";
+const links=[{href:"/analyze",label:"Analyze",route:"/analyze"},{href:"/#how",label:"How it works"},{href:"/demo",label:"Example",route:"/demo"},{href:"/methodology",label:"Methodology",route:"/methodology"}];
+export function SiteNav(){const pathname=usePathname();return <header className="site-nav"><div className="nav-inner"><Link className="wordmark" href="/" aria-label="PR Consequence Simulator home"><GitBranch size={16}/><span>PR consequence simulator</span></Link><nav aria-label="Primary navigation">{links.map(link=><Link key={link.label} href={link.href} className={link.route&&pathname===link.route?"active":""}>{link.label}</Link>)}</nav><Link className="nav-cta" href="/analyze">Analyze your change <span aria-hidden>→</span></Link></div></header>}

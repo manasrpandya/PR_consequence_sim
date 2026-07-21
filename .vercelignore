@@ -1,0 +1,16 @@
+.git/
+.vercel/
+.next/
+**/.next/
+node_modules/
+**/node_modules/
+services/engine/.venv/
+services/engine/tests/
+**/__pycache__/
+**/.pytest_cache/
+**/.mypy_cache/
+**/.ruff_cache/
+apps/web/.env.local
+.env.local
+docs/
+*.tsbuildinfo

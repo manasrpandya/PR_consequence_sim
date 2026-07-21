@@ -1,0 +1,27 @@
+{
+  "repositories": [{
+    "id": "meridian-commerce", "name": "meridian-commerce", "owner": "Northstar Labs", "default_branch": "main", "language": "TypeScript",
+    "modules": [
+      {"id":"storefront","name":"Storefront UI","path":"apps/storefront","criticality":0.2,"owner":"Growth","shared":false},
+      {"id":"checkout","name":"Checkout","path":"packages/checkout","criticality":0.75,"owner":"Commerce","shared":false},
+      {"id":"orders","name":"Orders","path":"packages/orders","criticality":0.65,"owner":"Commerce","shared":false},
+      {"id":"payments","name":"Payments","path":"packages/payments","criticality":1.0,"owner":"Money Movement","shared":false},
+      {"id":"auth","name":"Authentication","path":"packages/auth","criticality":0.8,"owner":"Identity","shared":false},
+      {"id":"database","name":"Shared Database","path":"packages/database","criticality":1.0,"owner":"Platform","shared":true},
+      {"id":"api","name":"API Routes","path":"apps/api","criticality":0.8,"owner":"Platform","shared":false}
+    ],
+    "dependency_edges": [
+      {"from_module":"storefront","to_module":"checkout"},{"from_module":"checkout","to_module":"payments"},{"from_module":"checkout","to_module":"orders"},{"from_module":"checkout","to_module":"auth"},{"from_module":"orders","to_module":"database"},{"from_module":"payments","to_module":"database"},{"from_module":"auth","to_module":"database"},{"from_module":"api","to_module":"orders"},{"from_module":"api","to_module":"payments"}
+    ],
+    "tests": [
+      {"id":"ui-cart-unit","file":"apps/storefront/cart.test.tsx","type":"unit","duration_seconds":22,"modules":["storefront"],"failure_associations":{"storefront":0.20}},
+      {"id":"checkout-unit","file":"packages/checkout/checkout.test.ts","type":"unit","duration_seconds":38,"modules":["checkout"],"failure_associations":{"checkout":0.55}},
+      {"id":"order-unit","file":"packages/orders/order.test.ts","type":"unit","duration_seconds":42,"modules":["orders"],"failure_associations":{"orders":0.50}},
+      {"id":"payments-unit","file":"packages/payments/payments.test.ts","type":"unit","duration_seconds":55,"modules":["payments"],"failure_associations":{"payments":0.65}},
+      {"id":"api-integration","file":"apps/api/api.integration.test.ts","type":"integration","duration_seconds":145,"modules":["api","orders","payments"],"failure_associations":{"database":0.45,"payments":0.55}},
+      {"id":"checkout-e2e","file":"e2e/checkout.spec.ts","type":"e2e","duration_seconds":280,"modules":["storefront","checkout","orders","payments"],"failure_associations":{"checkout":0.60,"payments":0.52}},
+      {"id":"database-integration","file":"packages/database/database.integration.test.ts","type":"integration","duration_seconds":190,"modules":["database","orders","payments","auth"],"failure_associations":{"database":0.85}},
+      {"id":"auth-unit","file":"packages/auth/auth.test.ts","type":"unit","duration_seconds":34,"modules":["auth"],"failure_associations":{"auth":0.62}}
+    ], "full_suite_duration_seconds":806
+  }]
+}

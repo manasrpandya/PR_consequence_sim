@@ -1,0 +1,4 @@
+import type {Metadata} from "next";import "./globals.css";import "./intake.css";import {SiteNav} from "../components/site-nav";
+const site=process.env.NEXT_PUBLIC_APP_URL??"http://localhost:3000";
+export const metadata:Metadata={metadataBase:new URL(site),title:{default:"PR Consequence Simulator",template:"%s · PR Consequence Simulator"},description:"Analyze a proposed code change and predict blast radius, relevant tests, engineering risk, workflow delay, and the safest next action.",alternates:{canonical:"/"},openGraph:{title:"PR Consequence Simulator",description:"Evidence-backed technical and workflow consequences before merge.",url:"/",siteName:"PR Consequence Simulator",type:"website"},robots:{index:true,follow:true}};
+export default function RootLayout({children}:{children:React.ReactNode}){return <html lang="en"><body><SiteNav/>{children}</body></html>}

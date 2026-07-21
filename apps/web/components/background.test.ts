@@ -1,0 +1,2 @@
+import {readFileSync} from "node:fs";import {describe,expect,it} from "vitest";
+describe("stationary dotted background",()=>{it("uses a fixed non-interactive viewport layer without grid translation",()=>{const css=readFileSync(new URL("../app/intake.css",import.meta.url),"utf8");expect(css).toMatch(/\.dot-field[^}]*position:fixed/);expect(css).toMatch(/inset:0/);expect(css).toMatch(/pointer-events:none/);expect(css).toMatch(/background-position:0 0/);expect(css).toMatch(/prefers-reduced-motion/);expect(css).not.toMatch(/@keyframes stationaryPulse[^}]*transform/)})});

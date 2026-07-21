@@ -1,0 +1,10 @@
+fastapi==0.119.1
+uvicorn[standard]==0.38.0
+pydantic==2.12.3
+pytest==9.0.1
+httpx==0.28.1
+ruff==0.14.2
+mypy==1.18.2
+python-multipart==0.0.20
+openai==2.13.0
+dulwich==0.25.0
